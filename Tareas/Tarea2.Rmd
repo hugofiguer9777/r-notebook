@@ -1,0 +1,112 @@
+# Funciones en R
+
+**¿Cuál es la estructura de una función?**
+
+Las partes de una función son:
+
+1. Entradas o argumentos: estos son valores que serviran al momento de la ejecución de la función.
+2. Cuerpo: es el conjunto de todas las instrucciones que contiene la función.
+3. Salidas: son los resultados que puedan surgir luego de la ejecucion de la función.
+
+Estructura básica:
+
+nombre_de_funcion <- function(par1, par2, ...) {
+  cuerpo
+  cuerpo
+  cuerpo
+  cuerpo
+  return(resultado)
+}
+
+
+**Ejemplo de una función:**
+
+```{r}
+suma <- function(x, y) {
+          resultado <- x + y
+          return(resultado)
+}
+
+suma(1,9)
+suma(x=4, y=1)
+
+```
+
+
+**Argumentos**
+Los argumentos de las funciones son una serie de valores, que pueden ser opcionales, de manera que ciertas variables puedan tener diferentes valores dentro de la función.
+
+
+**Argumentos por valor**
+Este tipo de argumentos son los que se pasan sin ninguna referencia a la memoria de la variable, cambiando solamente su valor a nivel de ambiente en donde fue alterada.
+
+
+```{r}
+
+resultadoX <- 6;
+multiplicacion <- function(x, y) {
+                    resultadoX <- x * y
+                    return(resultadoX)
+                  }
+
+multiplicacion(2,2) # retorna valor de 4
+resultadoX          # el valor sigue siendo de 5
+
+```
+
+
+# Familia apply
+
+
+**lapply**
+La función lapply toma como entrada un vector de datos, de los cuales se aplicaran a la función específicada en el segundo argumento. El valor de retorno es un tipo de dato list.
+
+```{r}
+# create sample data
+numeros <- c(1:10)
+print( "original numbers:")
+numeros
+
+valor_cuadrado <- function(x) {
+  resultado <- x*x
+  return(resultado)
+}
+  
+# apply lapply() function
+print("valores luego de lapply():")
+lapply(numeros, valor_cuadrado)
+
+```
+
+**sapply**
+La función sapply es exactamente igual a la funcion lapply, con la única diferencia que el valor de retorno de esta función depende del tipo de dato que se ingrese como el primer argumento.
+
+```{r}
+# create sample data
+numeros <- c(1:15)
+print( "original numbers:")
+numeros
+
+  
+# apply lapply() function
+print("valores luego de lapply():")
+sapply(numeros, valor_cuadrado)     # retorna un vector
+
+
+```
+
+
+**vapply**
+Esta función se comporta de igual forma que sapply, con la diferencia que debemos especificar el tipo de dato de salida de forma explicita en la función.
+```{r}
+lista_vapply <- list(a = c(1, 3, 5), b = c(2,4,6), c = c(9,8,7), d = c("a", "b", "c"))
+sapply(lista_vapply, max)
+
+
+vapply(lista_vapply, length, numeric(1))
+
+
+```
+
+
+
